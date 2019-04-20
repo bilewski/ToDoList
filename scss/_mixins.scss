@@ -1,21 +1,15 @@
-@mixin whiteBtn($width, $height, $fontSize) {
+@mixin newBtn($width, $height, $fontSize) {
    width: $width;
    height: $height;
    font-size: $fontSize;
-   background-image: linear-gradient(rgb(231, 231, 231), #bbb);
-   border: 1px solid #C4C4C4;
-   border-radius: $fontSize +10;
+   line-height: 0%;
 }
 
-@mixin taskCell($flexBasis, $height, $padding, $defaultBGColor) {
+@mixin taskCell($flexBasis, $height, $padding) {
    display: flex;
-   box-sizing: border-box;
    align-items: center;
    flex-basis: $flexBasis;
    height: $height;
    padding: $padding;
-   background-color: $defaultBGColor;
-   border-radius: .7em;
-   color: whitesmoke;
-   border: 1px solid rgba(0, 0, 0, 0.3);
+
 }

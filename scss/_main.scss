@@ -1,6 +1,5 @@
 .l-site-container {
-   font-size: 10px;
-   padding: .5em;
+   padding: 5px;
 }
 
 .c-group-tasks {
@@ -9,61 +8,166 @@
    flex-wrap: wrap;
 }
 
-.c-category {
-   @include taskCell(100%, 3.2em, 0 .8em, #262626);
-   background-image: linear-gradient(#2D2D2D, #262626);
-
+.c-category,
+.c-tasks {
    &__text {
-      font-size: 1.2rem;
       flex-grow: 1;
    }
 
    &__manage {
       font-size: 1.3rem;
-      padding: 0 .6em;
-      color: rgba(255, 255, 255, 0.7);
+      padding: 6px 8px;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.3);
+
+      &:focus,
+      &:active,
+      &:hover {
+         color: white;
+      }
    }
+
+   &__checkbox,
+   &__text,
+   &__manage {
+      z-index: 1;
+   }
+}
+
+.c-category,
+.c-tasks__item {
+   position: relative;
+   box-sizing: border-box;
+   border: 1px solid rgba(0, 0, 0, 0.3);
+   border-radius: 8px;
+   color: whitesmoke;
+
+   &::after {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+      border-radius: 8px;
+      content: '';
+   }
+}
+
+.c-category {
+   @include taskCell(100%, 32px, 0 8px);
+   background-color: #2D2D2D;
 }
 
 .c-tasks {
    display: flex;
    flex-wrap: wrap;
+   list-style: none;
+   margin: 0;
+   padding: 0 4px;
 
    &__item {
-      @include taskCell(100%, 3em, .4em .8em, rgb(65, 65, 65));
-      position: relative;
-      margin: .4em 0 0 0;
-
-      &::after {
-         display: block;
-         position: absolute;
-         top: 0;
-         bottom: 0;
-         left: 0;
-         right: 0;
-         border-radius: .7em;
-         background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
-         content: '';
-      }
+      @include taskCell(100%, 30px, 4px 8px);
+      margin: 4px 0 0;
+      background-color: #535353;
    }
 
    &__checkbox {
-      margin: 0;
-      z-index: 1;
+      &-input {
+         z-index: 1;
+      }
+
+      &-label {
+         flex-grow: 1;
+         margin: auto;
+         -webkit-user-select: none;
+         user-select: none;
+         cursor: pointer;
+         z-index: 1;
+
+         span {
+            display: inline-block;
+            vertical-align: middle;
+            // transform: translate3d(0, 0, 0);
+
+            &:first-child {
+               position: relative;
+               width: 18px;
+               height: 18px;
+               border-radius: 3px;
+               transform: scale(1);
+               vertical-align: middle;
+               background: rgba(255, 255, 255, 0.1);
+               border: 1px solid rgba(255, 255, 255, 0.6);
+               box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+               transition: all 0.2s ease;
+
+               & svg {
+                  position: absolute;
+                  top: 3px;
+                  left: 2px;
+                  fill: none;
+                  stroke: #FFFFFF;
+                  stroke-width: 2;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                  stroke-dasharray: 16px;
+                  stroke-dashoffset: 16px;
+                  transition: all 0.3s ease;
+                  transition-delay: 0.1s;
+                  transform: translate3d(0, 0, 0);
+               }
+
+               &:before {
+                  content: "";
+                  width: 100%;
+                  height: 100%;
+                  background: #506EEC;
+                  display: block;
+                  transform: scale(0);
+                  opacity: 1;
+                  border-radius: 50%;
+               }
+            }
+
+            &:last-child {
+               padding-left: 4px;
+               color: rgba(255, 255, 255, 0.80);
+               transition: all 0.6s ease;
+            }
+         }
+
+         &:hover span:first-child {
+            border-color: rgb(255, 255, 255);
+         }
+      }
+
+      &-input:checked+&-label span:last-child {
+         color: rgba(255, 255, 255, 0.5);
+         text-decoration: line-through;
+      }
+
+      &-input:checked+&-label span:first-child {
+         background: rgb(0, 170, 77);
+         border-color: rgb(137, 236, 80);
+         animation: wave 0.4s ease;
+      }
+
+      &-input:checked+&-label span:first-child svg {
+         stroke-dashoffset: 0;
+      }
+
+      &-input:checked+&-label span:first-child:before {
+         transform: scale(3.5);
+         opacity: 0;
+         transition: all 0.6s ease;
+      }
    }
 
-   &__text {
-      font-size: 1.2rem;
-      flex-grow: 1;
-      padding: 0 0 0 .5em;
-      color: rgba(255, 255, 255, 0.85);
-      z-index: 1;
-   }
-
-   &__manage {
-      font-size: 1.3rem;
-      padding: 0 .6em;
-      color: rgba(255, 255, 255, 0.7);
-      z-index: 1;
+   @keyframes wave {
+      50% {
+         transform: scale(0.9);
+      }
    }
 }

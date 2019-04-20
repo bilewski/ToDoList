@@ -22,7 +22,7 @@
 </head>
 
 <body>
-   <header class="l-site-header">
+   <header class="l-site-header t-gradient-dark">
       <nav class="c-app-nav">
          <div class="c-logo">
             <a class="c-logo__link" href="#">
@@ -42,30 +42,95 @@
       </nav>
    </header>
 
+   <div class="l-task-actions">
+      <div class="c-task-actions">
+         <form class="c-search-task" role="search">
+            <label class="c-search-task__label" for="search-input">Szukaj:</label>
+            <input class="c-search-task__input" type="search" id="search-input" placeholder="Wpisz szukane zadanie">
+         </form>
+
+         <div class="c-add">
+            <form class="c-add__cat">
+               <label class="c-add__label" for="category-input">Kategoria:</label>
+               <input class="c-add__input" type="text" id="category-input" placeholder="Wpisz nazwę kategorii" required
+                  aria-required="true">
+               <input class="c-add__input-color" type="color" id="category-color" aria-required="false">
+               <button class="c-add__btn" type="submit" name="submit">Dodaj</button>
+            </form>
+
+            <form class="c-add__task">
+               <label class="c-add__label" for="task-input">Zadanie:</label>
+               <input class="c-add__input c-add__input--task" type="text" id="task-input"
+                  placeholder="Wpisz nazwę zadania" required aria-required="true">
+               <label class="c-add__label h-hide" for="cat-select">Wybierz kategorię:</label>
+               <select class="c-add__select" name="cat-select" id="category-select" required aria-required="true">
+                  <option value="bardzo długa kategoria">Bardzo długa kategoria</option>
+                  <option value="test">Test</option>
+                  <option value="test">Test</option>
+               </select>
+               <input class="c-add__input-color" type="color" id="task-color" aria-required="false">
+               <button class="c-add__btn" type="submit" name="submit">Dodaj</button>
+            </form>
+         </div>
+      </div>
+   </div>
+
    <main class="l-site-container">
       <section class="c-group-tasks">
          <div class="c-category">
             <p class="c-category__text">Kategoria</p>
-            <span class="c-category__manage fas fa-pen"></span>
-            <span class="c-category__manage fas fa-copy"></span>
-            <span class="c-category__manage fas fa-trash-alt"></span>
+            <span class="c-category__manage t-task-menage fas fa-pen"></span>
+            <span class="c-category__manage t-task-menage fas fa-copy"></span>
+            <span class="c-category__manage t-task-menage fas fa-trash-alt"></span>
          </div>
-         <div class="c-tasks">
-            <div class="c-tasks__item">
-               <input class="c-tasks__checkbox" type="checkbox" name="task-done" id="task-done">
-               <p class="c-tasks__text">Wynieś śmieci</p>
+         <ul class="c-tasks">
+
+            <li class="c-tasks__item" style="background: rgb(0, 132, 255)">
+               <input class="c-tasks__checkbox-input" id="task1" type="checkbox" style="display: none;" />
+               <label class="c-tasks__checkbox-label" for="task1">
+                  <span>
+                     <svg width="12px" height="10px" viewbox="0 0 12 10">
+                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                     </svg>
+                  </span>
+                  <span class="c-tasks__text">Pozmywaj naczynia</span>
+               </label>
                <span class="c-tasks__manage fas fa-pen"></s></span>
                <span class="c-tasks__manage fas fa-copy"></s></span>
                <span class="c-tasks__manage fas fa-trash-alt"></span>
-            </div>
-            <div class="c-tasks__item" style="background-color: rebeccapurple">
-               <input class="c-tasks__checkbox" type="checkbox" name="task-done" id="task-done">
-               <p class="c-tasks__text">Wynieś śmieci</p>
+            </li>
+
+            <li class="c-tasks__item" style="background: rebeccapurple">
+               <input class="c-tasks__checkbox-input" id="task2" type="checkbox" style="display: none;" />
+               <label class="c-tasks__checkbox-label" for="task2">
+                  <span>
+                     <svg width="12px" height="10px" viewbox="0 0 12 10">
+                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                     </svg>
+                  </span>
+                  <span class="c-tasks__text">Wynieś śmieci</span>
+               </label>
                <span class="c-tasks__manage fas fa-pen"></span>
                <span class="c-tasks__manage fas fa-copy"></s></span>
                <span class="c-tasks__manage fas fa-trash-alt"></span>
-            </div>
-         </div>
+            </li>
+
+            <li class="c-tasks__item" style="background: rgb(51, 153, 119)">
+               <input class="c-tasks__checkbox-input" id="task3" type="checkbox" style="display: none;" />
+               <label class="c-tasks__checkbox-label" for="task3">
+                  <span>
+                     <svg width="12px" height="10px" viewbox="0 0 12 10">
+                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                     </svg>
+                  </span>
+                  <span class="c-tasks__text">Wynieś śmieci</span>
+               </label>
+               <span class="c-tasks__manage fas fa-pen"></span>
+               <span class="c-tasks__manage fas fa-copy"></s></span>
+               <span class="c-tasks__manage fas fa-trash-alt"></span>
+            </li>
+
+         </ul>
       </section>
    </main>
 

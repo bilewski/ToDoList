@@ -1,17 +1,23 @@
 * {
    box-sizing: border-box;
+   font: 10px 'Roboto Condensed', sans-serif;
 }
 
 html {
-   font-size: 10px;
-   font-family: 'Roboto Condensed',
-      sans-serif;
+   height: 100%;
    overflow-x: hidden;
 }
 
 body {
+   position: relative;
+   min-height: 100%;
    margin: 0;
+   padding-bottom: 6rem;
    background-color: $themeBackgroundColor;
+}
+
+h1 {
+   font-size: 1.6rem;
 }
 
 a {
@@ -19,22 +25,39 @@ a {
    text-decoration: none;
 }
 
-.l-site-header {
-   font-size: 10px;
+a,
+p,
+span,
+input,
+label,
+select,
+option,
+button {
+   font-size: 1.2rem;
 }
+
+.l-site-header {
+   height: 40px;
+   width: 100%;
+
+   &.t-gradient-dark {
+      background-color: #151515;
+      background-image: linear-gradient(#151515, #2D2D2D);
+      border-bottom: 1px solid black;
+   }
+}
+
 
 .c-app-nav {
    display: flex;
-   height: 4em;
-   width: 100%;
-   background-image: linear-gradient(#151515, #2D2D2D);
-   border-bottom: 1px solid black;
+   height: 100%;
+   margin: 0 auto;
 }
 
 .c-logo {
    display: flex;
    flex-grow: 1;
-   padding-left: .5em;
+   padding: 0 0 0 5px;
 
    &__link {
       display: flex;
@@ -42,13 +65,12 @@ a {
    }
 
    &__img {
-      height: 4em;
+      height: 36px;
    }
 
    &__title {
       margin: 0;
-      padding: .4em;
-      font-size: 1.6em;
+      padding: 4px;
    }
 
    &__motto {
@@ -64,10 +86,14 @@ a {
    list-style: none;
 
    &__item {
-      padding: 0 1em 0 0;
+      padding: 0 10px 0 0;
    }
 
    &__btn {
-      @include whiteBtn(31px, 31px, 1.8em);
+      @include newBtn(31px, 31px, 1.6em);
+      background-color: rgb(231, 231, 231);
+      background-image: linear-gradient(rgb(231, 231, 231), #bbb);
+      border: 1px solid #C4C4C4;
+      border-radius: 50%;
    }
 }
