@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>ToDo List</title>
+   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;subset=latin-ext"
+      rel="stylesheet">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+   <link rel="stylesheet" href="./css/style.css">
+
+   <meta property="og:title" content="ToDo List">
+   <meta property="og:description" content="Moja wersja ToDo Listy">
+   <meta property="og:type" content="website.app">
+   <meta property="og:url" content="https://bilewski.com/todo/">
+   <meta property="og:image" content="https://bilewski.com/todo/img/logo.png">
+   <meta property="og:image:width" content="200">
+   <meta property="og:image:height" content="200">
+</head>
+
+<body>
+   <header class="l-site-header">
+      <nav class="c-app-nav">
+         <div class="c-logo">
+            <a class="c-logo__link" href="#">
+               <img class="c-logo__img" src="img/logo.png" alt="">
+               <h1 class="c-logo__title">ToDo List</h1>
+            </a>
+            <p class="c-logo__motto h-hide">Moja wersja ToDo Listy</p>
+         </div>
+         <ul class="c-menu" aria-label="Obsługa aplikacji">
+            <li class="c-menu__item">
+               <button class="c-menu__btn"><span class="fas fa-search"></span></button>
+            </li>
+            <li class="c-menu__item">
+               <button class="c-menu__btn"><span class="fas fa-plus"></span></button>
+            </li>
+         </ul>
+      </nav>
+   </header>
+
+   <main class="l-site-container">
+      <section class="c-group-tasks">
+         <div class="c-category">
+            <p class="c-category__text">Kategoria</p>
+            <span class="c-category__manage fas fa-pen"></span>
+            <span class="c-category__manage fas fa-copy"></span>
+            <span class="c-category__manage fas fa-trash-alt"></span>
+         </div>
+         <div class="c-tasks">
+            <div class="c-tasks__item">
+               <input class="c-tasks__checkbox" type="checkbox" name="task-done" id="task-done">
+               <p class="c-tasks__text">Wynieś śmieci</p>
+               <span class="c-tasks__manage fas fa-pen"></s></span>
+               <span class="c-tasks__manage fas fa-copy"></s></span>
+               <span class="c-tasks__manage fas fa-trash-alt"></span>
+            </div>
+            <div class="c-tasks__item" style="background-color: rebeccapurple">
+               <input class="c-tasks__checkbox" type="checkbox" name="task-done" id="task-done">
+               <p class="c-tasks__text">Wynieś śmieci</p>
+               <span class="c-tasks__manage fas fa-pen"></span>
+               <span class="c-tasks__manage fas fa-copy"></s></span>
+               <span class="c-tasks__manage fas fa-trash-alt"></span>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <footer class="l-site-footer">
+      <div class="c-copyright">
+         <p class="c-copyright__text">Copyright © by <a href="https://www.bilewski.com" rel="author">Paweł
+               Bilewski</a></p>
+      </div>
+   </footer>
+
+   <script src="js/main.js" defer></script>
+</body>
+
+</html>

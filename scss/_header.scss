@@ -1,0 +1,73 @@
+* {
+   box-sizing: border-box;
+}
+
+html {
+   font-size: 10px;
+   font-family: 'Roboto Condensed',
+      sans-serif;
+   overflow-x: hidden;
+}
+
+body {
+   margin: 0;
+   background-color: $themeBackgroundColor;
+}
+
+a {
+   color: $themeColorLink1;
+   text-decoration: none;
+}
+
+.l-site-header {
+   font-size: 10px;
+}
+
+.c-app-nav {
+   display: flex;
+   height: 4em;
+   width: 100%;
+   background-image: linear-gradient(#151515, #2D2D2D);
+   border-bottom: 1px solid black;
+}
+
+.c-logo {
+   display: flex;
+   flex-grow: 1;
+   padding-left: .5em;
+
+   &__link {
+      display: flex;
+      align-items: center;
+   }
+
+   &__img {
+      height: 4em;
+   }
+
+   &__title {
+      margin: 0;
+      padding: .4em;
+      font-size: 1.6em;
+   }
+
+   &__motto {
+      display: none;
+   }
+}
+
+.c-menu {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   flex-grow: 1;
+   list-style: none;
+
+   &__item {
+      padding: 0 1em 0 0;
+   }
+
+   &__btn {
+      @include whiteBtn(31px, 31px, 1.8em);
+   }
+}
