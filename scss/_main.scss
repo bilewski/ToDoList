@@ -6,6 +6,7 @@
    display: flex;
    flex-direction: column;
    flex-wrap: wrap;
+   margin: 0 0 10px;
 }
 
 .c-category,
@@ -68,7 +69,7 @@
    padding: 0 4px;
 
    &__item {
-      @include taskCell(100%, 30px, 4px 8px);
+      @include taskCell(100%, 100%, 4px 8px);
       margin: 4px 0 0;
       background-color: #535353;
    }
@@ -79,6 +80,8 @@
       }
 
       &-label {
+         display: flex;
+         align-items: center;
          flex-grow: 1;
          margin: auto;
          -webkit-user-select: none;
@@ -90,6 +93,8 @@
             display: inline-block;
             vertical-align: middle;
             // transform: translate3d(0, 0, 0);
+            padding: 2px 0;
+            min-width: 18px;
 
             &:first-child {
                position: relative;
@@ -132,7 +137,7 @@
             }
 
             &:last-child {
-               padding-left: 4px;
+               padding-left: 6px;
                color: rgba(255, 255, 255, 0.80);
                transition: all 0.6s ease;
             }
@@ -159,7 +164,7 @@
       }
 
       &-input:checked+&-label span:first-child:before {
-         transform: scale(3.5);
+         transform: scale(3);
          opacity: 0;
          transition: all 0.6s ease;
       }

@@ -25,18 +25,18 @@
    <header class="l-site-header t-gradient-dark">
       <nav class="c-app-nav">
          <div class="c-logo">
-            <a class="c-logo__link" href="#">
+            <a class="c-logo__link" href="index.html">
                <img class="c-logo__img" src="img/logo.png" alt="">
                <h1 class="c-logo__title">ToDo List</h1>
             </a>
             <p class="c-logo__motto h-hide">Moja wersja ToDo Listy</p>
          </div>
          <ul class="c-menu" aria-label="Obsługa aplikacji">
-            <li class="c-menu__item">
-               <button class="c-menu__btn"><span class="fas fa-search"></span></button>
+            <li class="c-menu__item ">
+               <button class="c-menu__btn h-search-btn"><span class="fas fa-search"></span></button>
             </li>
-            <li class="c-menu__item">
-               <button class="c-menu__btn"><span class="fas fa-plus"></span></button>
+            <li class="c-menu__item ">
+               <button class="c-menu__btn h-add-btn"><span class="fas fa-plus"></span></button>
             </li>
          </ul>
       </nav>
@@ -44,17 +44,17 @@
 
    <div class="l-task-actions">
       <div class="c-task-actions">
-         <form class="c-search-task" role="search">
+         <form class="c-search-task h-hide" role="search">
             <label class="c-search-task__label" for="search-input">Szukaj:</label>
             <input class="c-search-task__input" type="search" id="search-input" placeholder="Wpisz szukane zadanie">
          </form>
 
-         <div class="c-add">
+         <div class="c-add h-hide">
             <form class="c-add__cat">
                <label class="c-add__label" for="category-input">Kategoria:</label>
                <input class="c-add__input" type="text" id="category-input" placeholder="Wpisz nazwę kategorii" required
                   aria-required="true">
-               <input class="c-add__input-color" type="color" id="category-color" aria-required="false">
+               <input class="c-add__input-color" value="#2D2D2D" type="color" id="category-color" aria-required="false">
                <button class="c-add__btn" type="submit" name="submit">Dodaj</button>
             </form>
 
@@ -64,11 +64,9 @@
                   placeholder="Wpisz nazwę zadania" required aria-required="true">
                <label class="c-add__label h-hide" for="cat-select">Wybierz kategorię:</label>
                <select class="c-add__select" name="cat-select" id="category-select" required aria-required="true">
-                  <option value="bardzo długa kategoria">Bardzo długa kategoria</option>
-                  <option value="test">Test</option>
-                  <option value="test">Test</option>
+                  <option value="Kategoria0">Kategoria</option>
                </select>
-               <input class="c-add__input-color" type="color" id="task-color" aria-required="false">
+               <input class="c-add__input-color" value="#535353" type="color" id="task-color" aria-required="false">
                <button class="c-add__btn" type="submit" name="submit">Dodaj</button>
             </form>
          </div>
@@ -78,16 +76,16 @@
    <main class="l-site-container">
       <section class="c-group-tasks">
          <div class="c-category">
-            <p class="c-category__text">Kategoria</p>
+            <p class="c-category__text" data-value="Kategoria0">Kategoria</p>
             <span class="c-category__manage t-task-menage fas fa-pen"></span>
             <span class="c-category__manage t-task-menage fas fa-copy"></span>
             <span class="c-category__manage t-task-menage fas fa-trash-alt"></span>
          </div>
          <ul class="c-tasks">
 
-            <li class="c-tasks__item" style="background: rgb(0, 132, 255)">
-               <input class="c-tasks__checkbox-input" id="task1" type="checkbox" style="display: none;" />
-               <label class="c-tasks__checkbox-label" for="task1">
+            <li class="c-tasks__item" style="background: #0084ff">
+               <input class="c-tasks__checkbox-input" id="task1t" type="checkbox" style="display: none;" />
+               <label class="c-tasks__checkbox-label" for="task1t">
                   <span>
                      <svg width="12px" height="10px" viewbox="0 0 12 10">
                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
@@ -100,24 +98,25 @@
                <span class="c-tasks__manage fas fa-trash-alt"></span>
             </li>
 
-            <li class="c-tasks__item" style="background: rebeccapurple">
-               <input class="c-tasks__checkbox-input" id="task2" type="checkbox" style="display: none;" />
-               <label class="c-tasks__checkbox-label" for="task2">
+            <li class="c-tasks__item" style="background: #663399">
+               <input class="c-tasks__checkbox-input" id="task2t" type="checkbox" style="display: none;" />
+               <label class="c-tasks__checkbox-label" for="task2t">
                   <span>
                      <svg width="12px" height="10px" viewbox="0 0 12 10">
                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                      </svg>
                   </span>
-                  <span class="c-tasks__text">Wynieś śmieci</span>
+                  <span class="c-tasks__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam.
+                  </span>
                </label>
                <span class="c-tasks__manage fas fa-pen"></span>
                <span class="c-tasks__manage fas fa-copy"></s></span>
                <span class="c-tasks__manage fas fa-trash-alt"></span>
             </li>
 
-            <li class="c-tasks__item" style="background: rgb(51, 153, 119)">
-               <input class="c-tasks__checkbox-input" id="task3" type="checkbox" style="display: none;" />
-               <label class="c-tasks__checkbox-label" for="task3">
+            <li class="c-tasks__item" style="background: #339977">
+               <input class="c-tasks__checkbox-input" id="task3t" type="checkbox" style="display: none;" />
+               <label class="c-tasks__checkbox-label" for="task3t">
                   <span>
                      <svg width="12px" height="10px" viewbox="0 0 12 10">
                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
@@ -136,7 +135,7 @@
 
    <footer class="l-site-footer">
       <div class="c-copyright">
-         <p class="c-copyright__text">Copyright © by <a href="https://www.bilewski.com" rel="author">Paweł
+         <p class="c-copyright__text">Copyright © by <a href="http://www.bilewski.com" rel="author">Paweł
                Bilewski</a></p>
       </div>
    </footer>

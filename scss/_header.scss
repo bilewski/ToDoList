@@ -47,7 +47,6 @@ button {
    }
 }
 
-
 .c-app-nav {
    display: flex;
    height: 100%;
@@ -95,5 +94,6 @@ button {
       background-image: linear-gradient(rgb(231, 231, 231), #bbb);
       border: 1px solid #C4C4C4;
       border-radius: 50%;
+      cursor: pointer;
    }
 }
