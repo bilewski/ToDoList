@@ -51,16 +51,25 @@ window.addEventListener('DOMContentLoaded', () => {
    const addTaskFormColor = addTaskForm.querySelector('.c-add__input-color');
 
    const searchTask = (e) => {
+      const groups = siteContainer.querySelectorAll('.c-group-tasks');
       const tasks = siteContainer.querySelectorAll('.c-tasks__item');
       tasks.forEach(element => {
          const taskText = element.children[1].lastElementChild.innerText;
-         if (taskText.indexOf(e.target.value) !== -1) {
-            element.style.setProperty('display', '');
-         } else {
-            element.style.setProperty('display', 'none');
+         if (taskText.indexOf(e.target.value) !== -1) element.style.setProperty('display', '');
+         else element.style.setProperty('display', 'none');
+      });
+      groups.forEach(element => {
+         const tasksCount = element.lastElementChild.childElementCount;
+         let repeating = 0;
+         for (i = 0; i < tasksCount; i++) {
+            const task = element.lastElementChild.children[i].style.display;
+            if (task === "none") repeating++;
          }
+         if (repeating === tasksCount) element.style.setProperty('display', 'none');
+         else element.style.setProperty('display', '');
       });
    }
+   searchTaskInput.addEventListener('input', searchTask);
 
    const addCat = (e) => {
       e.preventDefault();
@@ -91,7 +100,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
       addCatFormInput.value = "";
       addCatFormColor.value = "#2D2D2D";
-   };
+   }
+   addCatForm.addEventListener('submit', addCat);
 
    const addTask = (e) => {
       e.preventDefault();
@@ -118,10 +128,7 @@ window.addEventListener('DOMContentLoaded', () => {
       addTaskFormInput.value = "";
       addTaskFormColor.value = "#535353";
       taskIndex++;
-   };
-
-   searchTaskInput.addEventListener('input', searchTask);
-   addCatForm.addEventListener('submit', addCat);
+   }
    addTaskForm.addEventListener('submit', addTask);
 
    // Cats and Tasks actions
@@ -187,49 +194,44 @@ window.addEventListener('DOMContentLoaded', () => {
       }
       // Edit task
       else if (e.target.closest('.c-tasks__manage.fa-pen') !== null) {
-         const text = e.target.closest('.c-tasks__item');
-         const textChildren = text.children[1];
-         const textChangeForm = `
-            <form class="c-add__task">
+         const task = e.target.closest('.c-tasks__item');
+         const taskChildren = task.children[1];
+         const htmlEditForm = `
+            <form class="c-add__task t-task-edit">
                <label class="c-add__label" for="task-input" style="display:none;">Zadanie:</label>
-               <input class="c-add__input" type="text" id="task-input"
-                  value = "${textChildren.lastElementChild.innerText}"
+               <input class="c-add__input t-edit" type="text" id="task-input"
+                  value = "${taskChildren.lastElementChild.innerText}"
                   required aria - required = "true" >
-               <input class="c-add__input-color" value="#${rgbToHex(text.style.background)}" type="color" id="task-color" aria-required="false">
+               <input class="c-add__input-color t-edit" value="#${rgbToHex(task.style.background)}" type="color" id="task-color" aria-required="false">
                <button class="c-add__btn" type="submit" name="submit">Zmień</button>
             </form>`;
-
-         textChildren.firstElementChild.style.display = "none";
-         for (let i = 2; i <= 4; i++) {
-            text.children[i].style.display = "none";
+         //Change the content of the task to the edit form
+         for (let i = 1; i <= 4; i++) {
+            if (i == 1) task.children[i].firstElementChild.style.display = "none";
+            else task.children[i].style.display = "none";
          }
-         textChildren.lastElementChild.innerHTML = textChangeForm;
+         taskChildren.lastElementChild.innerHTML = htmlEditForm;
 
-         const changeForm = siteContainer.querySelector('.c-add__task');
-         changeForm.addEventListener('submit', (el) => {
+         //If the form will be sent
+         const editForm = siteContainer.querySelector('.c-add__task');
+         editForm.addEventListener('submit', (el) => {
             el.preventDefault();
-            const inputValue = changeForm.querySelector('.c-add__input').value;
-            const inputColorValue = changeForm.querySelector('.c-add__input-color').value;
+            const inputValue = editForm.querySelector('.c-add__input').value;
+            const inputColorValue = editForm.querySelector('.c-add__input-color').value;
 
-            textChildren.lastElementChild.innerHTML = inputValue;
-            text.style.background = inputColorValue;
-            textChildren.firstElementChild.style.display = "";
-            for (let i = 2; i <= 4; i++) {
-               text.children[i].style.display = "";
+            task.style.background = inputColorValue;
+            taskChildren.lastElementChild.innerHTML = inputValue;
+            for (let i = 1; i <= 4; i++) {
+               if (i == 1) task.children[i].firstElementChild.style.display = "";
+               else task.children[i].style.display = "";
             }
          });
       }
+      // Edit Category 
+      else if (e.target.closest('.c-category__manage.fa-pen') !== null) {
+         console.log('edit category');
+      }
       // e.target.closest('.c-tasks').appendChild(e.target.closest('.c-tasks__item')); // Przenoszenie do góry
    });
-
-
-
-
-
-
-
-
-
-
 
 });

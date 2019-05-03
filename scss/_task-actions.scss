@@ -51,7 +51,11 @@
       flex-wrap: wrap;
       justify-content: flex-end;
       flex-basis: 90%;
-      padding: 0px 0 10px;
+      padding: 0 0 10px;
+
+      &.t-task-edit {
+         padding-bottom: 0;
+      }
    }
 
    &__label {
@@ -70,6 +74,12 @@
 
       &--task {
          flex-basis: 100%;
+      }
+
+      &.t-edit {
+         background: rgba(0, 0, 0, 0.1);
+         color: white;
+         border: 1px solid rgba(0, 0, 0, 0.2);
       }
    }
 
