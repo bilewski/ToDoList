@@ -13,7 +13,38 @@ let rgbToHex = (rgb) => {
       else hex += color;
    }
    return hex;
-};
+}
+
+const enterData = (target, inputText, inputColor) => {
+   target.style.background = inputColor;
+   target.children[1].lastElementChild.innerHTML = inputText;
+   for (let i = 1; i <= 4; i++) {
+      if (i == 1) target.children[i].firstElementChild.style.display = "";
+      else target.children[i].style.display = "";
+   }
+}
+
+const htmlEditForm = (text, color) => {
+   return ` <form class="c-add__task t-task-edit">
+               <label class="c-add__label" for="task-input" style="display:none;">Zadanie:</label>
+               <input class="c-add__input t-edit" type="text" id="task-input"
+                  value = "${text.innerText}"
+                  required aria - required = "true" 
+                  autocomplete="off">
+               <input class="c-add__input-color t-edit" value="#${rgbToHex(color.style.background)}" type="color" id="task-color" aria-required="false">
+               <button class="c-add__btn" type="submit" name="submit">Zmień</button>
+            </form>`;
+}
+
+// class Edit {
+//    constructor(name, status) {
+//       this.name = name;
+//       this.status = status;
+//    }
+//    metoda() {
+//       console.log('dsds');
+//    }
+// }
 
 window.addEventListener('DOMContentLoaded', () => {
    const addBtn = document.querySelector('.h-add-btn');
@@ -70,7 +101,6 @@ window.addEventListener('DOMContentLoaded', () => {
       });
    }
    searchTaskInput.addEventListener('input', searchTask);
-
    const addCat = (e) => {
       e.preventDefault();
       const group = document.createElement('section');
@@ -109,10 +139,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
       const task = document.createElement('li');
       task.classList.add('c-tasks__item');
+      task.id = `task${taskIndex}`;
       task.style.background = addTaskFormColor.value;
       task.innerHTML =
-         `<input class="c-tasks__checkbox-input" id="task${taskIndex}" type="checkbox" style="display: none;" />
-               <label class="c-tasks__checkbox-label" for="task${taskIndex}">
+         `<input class="c-tasks__checkbox-input" id="task${taskIndex}-input" type="checkbox" style="display: none;" />
+               <label class="c-tasks__checkbox-label" for="task${taskIndex}-input">
                   <span>
                      <svg width="12px" height="10px" viewbox="0 0 12 10">
                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
@@ -120,8 +151,8 @@ window.addEventListener('DOMContentLoaded', () => {
                   </span>
                   <span class="c-tasks__text">${addTaskFormInput.value}</span>
                </label>
-               <span class="c-tasks__manage fas fa-pen"></s></span>
-               <span class="c-tasks__manage fas fa-copy"></s></span>
+               <span class="c-tasks__manage fas fa-pen"></span>
+               <span class="c-tasks__manage fas fa-copy"></span>
                <span class="c-tasks__manage fas fa-trash-alt"></span>`;
 
       tasks[addTaskSelect.selectedIndex].insertBefore(task, tasks[addTaskSelect.selectedIndex].firstChild);
@@ -131,6 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
    }
    addTaskForm.addEventListener('submit', addTask);
 
+   let prevData = prevDataCat = null;
    // Cats and Tasks actions
    siteContainer.addEventListener('click', (e) => {
       // Remove Task
@@ -158,8 +190,8 @@ window.addEventListener('DOMContentLoaded', () => {
          // Task added to DOM. A value has been added to the index of the copied element.
          const tasks = e.target.closest('.c-tasks');
          tasks.insertBefore(copyElement, tasks.firstChild);
-         tasks.firstChild.children[0].id = 'task' + taskIndex;
-         tasks.firstChild.children[1].setAttribute('for', 'task' + taskIndex);
+         tasks.firstChild.children[0].id = 'task' + taskIndex + '-input';
+         tasks.firstChild.children[1].setAttribute('for', 'task' + taskIndex + '-input');
 
          taskIndex++;
       }
@@ -172,8 +204,8 @@ window.addEventListener('DOMContentLoaded', () => {
          siteContainer.insertBefore(copyGroup, siteContainer.firstChild);
          // New index for copied tasks
          for (const li of siteContainer.firstElementChild.lastElementChild.children) {
-            li.children[0].id = 'task' + taskIndex;
-            li.children[1].setAttribute('for', 'task' + taskIndex);
+            li.children[0].id = 'task' + taskIndex + '-input';
+            li.children[1].setAttribute('for', 'task' + taskIndex + '-input');
             taskIndex++;
          }
          // A value has been added to the index of the copied elements. Selection options updated.
@@ -195,41 +227,59 @@ window.addEventListener('DOMContentLoaded', () => {
       // Edit task
       else if (e.target.closest('.c-tasks__manage.fa-pen') !== null) {
          const task = e.target.closest('.c-tasks__item');
-         const taskChildren = task.children[1];
-         const htmlEditForm = `
-            <form class="c-add__task t-task-edit">
-               <label class="c-add__label" for="task-input" style="display:none;">Zadanie:</label>
-               <input class="c-add__input t-edit" type="text" id="task-input"
-                  value = "${taskChildren.lastElementChild.innerText}"
-                  required aria - required = "true" >
-               <input class="c-add__input-color t-edit" value="#${rgbToHex(task.style.background)}" type="color" id="task-color" aria-required="false">
-               <button class="c-add__btn" type="submit" name="submit">Zmień</button>
-            </form>`;
          //Change the content of the task to the edit form
          for (let i = 1; i <= 4; i++) {
             if (i == 1) task.children[i].firstElementChild.style.display = "none";
             else task.children[i].style.display = "none";
          }
-         taskChildren.lastElementChild.innerHTML = htmlEditForm;
+         task.children[1].lastElementChild.innerHTML = htmlEditForm(task.children[1], task);
 
+         //Only one edit form
+         if (prevData !== null && prevData[0] !== e.target) {
+            enterData.apply(null, prevData);
+         }
          //If the form will be sent
-         const editForm = siteContainer.querySelector('.c-add__task');
-         editForm.addEventListener('submit', (el) => {
+         const editTask = siteContainer.querySelector('.c-tasks .c-add__task');
+         editTask.addEventListener('submit', (el) => {
             el.preventDefault();
-            const inputValue = editForm.querySelector('.c-add__input').value;
-            const inputColorValue = editForm.querySelector('.c-add__input-color').value;
-
-            task.style.background = inputColorValue;
-            taskChildren.lastElementChild.innerHTML = inputValue;
-            for (let i = 1; i <= 4; i++) {
-               if (i == 1) task.children[i].firstElementChild.style.display = "";
-               else task.children[i].style.display = "";
-            }
+            const inputValue = editTask.querySelector('.c-add__input').value;
+            const inputColorValue = editTask.querySelector('.c-add__input-color').value;
+            enterData(task, inputValue, inputColorValue);
+            prevData = null;
          });
+         const inputValue = editTask.querySelector('.c-add__input').value;
+         const inputColorValue = editTask.querySelector('.c-add__input-color').value;
+         prevData = [task, inputValue, inputColorValue];
       }
       // Edit Category 
       else if (e.target.closest('.c-category__manage.fa-pen') !== null) {
-         console.log('edit category');
+         const cat = e.target.closest('.c-category');
+         for (let i = 1; i <= 3; i++) {
+            cat.children[i].style.display = "none";
+         }
+         cat.firstElementChild.innerHTML = htmlEditForm(cat.firstElementChild, cat);
+
+         if (prevDataCat !== null && prevDataCat[0] !== e.target) {
+            cat.style.background = prevDataCat[2];
+            cat.firstElementChild.innerHTML = prevDataCat[1];
+            for (let i = 1; i <= 3; i++) cat.children[i].style.display = "";
+         }
+
+         const category = siteContainer.querySelector('.c-category .c-add__task');
+
+         category.addEventListener('submit', (el) => {
+            el.preventDefault();
+            const inputValue = category.querySelector('.c-add__input').value;
+            const inputColorValue = category.querySelector('.c-add__input-color').value;
+            cat.style.background = inputColorValue;
+            cat.firstElementChild.innerHTML = inputValue;
+            for (let i = 1; i <= 3; i++) cat.children[i].style.display = "";
+            prevDataCat = null;
+         });
+
+         const inputValue = category.querySelector('.c-add__input').value;
+         const inputColorValue = category.querySelector('.c-add__input-color').value;
+         prevDataCat = [cat, inputValue, inputColorValue];
       }
       // e.target.closest('.c-tasks').appendChild(e.target.closest('.c-tasks__item')); // Przenoszenie do góry
    });
