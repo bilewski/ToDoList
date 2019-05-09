@@ -15,7 +15,6 @@ const categoryMemory = [{
    categoryCopies: 0,
 }];
 
-
 class Copy {
    constructor() {
       this.newElementTag = null;
@@ -226,11 +225,13 @@ window.addEventListener('DOMContentLoaded', () => {
             m.categoryCopies++;
             copyNumber = m.categoryCopies;
             copyName = addCatFormInput.value + ' (' + copyNumber + ')';
+            break;
          }
       }
       group.innerHTML =
          `<div class="c-category" style="background:${addCatFormColor.value};">
-            <p class="c-category__text" data-cattitle="${addCatFormInput.value}" data-catcopy="${copyNumber}">${copyName}</p>
+            <p class="c-category__text" data-cattitle="${addCatFormInput.value}" data-catcopy="${copyNumber}">
+            ${copyName == "" ? addCatFormInput.value : copyName}</p>
             <span class="c-category__manage t-task-menage fas fa-pen"></span>
             <span class="c-category__manage t-task-menage fas fa-copy"></span>
             <span class="c-category__manage t-task-menage fas fa-trash-alt"></span>
