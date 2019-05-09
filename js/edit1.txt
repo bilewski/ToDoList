@@ -1,0 +1,24 @@
+         const task = e.target.closest('.c-tasks__item');
+         // //Change the content of the task to the edit form
+         // for (let i = 1; i < 5; i++) {
+         //    if (i == 1) task.children[i].firstElementChild.style.display = "none";
+         //    else task.children[i].style.display = "none";
+         // }
+         // task.children[1].lastElementChild.innerHTML = htmlEditForm(task.children[1], task);
+
+         //Only one edit form
+         if (prevData !== null && prevData[0] !== e.target) {
+            enterData.apply(null, prevData);
+         }
+         //If the form will be sent
+         const editTask = siteContainer.querySelector('.c-tasks .c-add__task');
+         editTask.addEventListener('submit', (el) => {
+            el.preventDefault();
+            const inputValue = editTask.querySelector('.c-add__input').value;
+            const inputColorValue = editTask.querySelector('.c-add__input-color').value;
+            enterData(task, inputValue, inputColorValue);
+            prevData = null;
+         });
+         const inputValue = editTask.querySelector('.c-add__input').value;
+         const inputColorValue = editTask.querySelector('.c-add__input-color').value;
+         prevData = [task, inputValue, inputColorValue];
